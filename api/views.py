@@ -1,6 +1,6 @@
 
 from rest_framework import viewsets, status
-from .models import Movie, Rating
+from .models import Movie, Comment
 from .serializers import MovieSerializer, CommentSerializer,UserSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -52,7 +52,7 @@ class MovieViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = (CommentSerializer)
-     """ authentication_classes = (TokenAuthentication, )
+    """ authentication_classes = (TokenAuthentication, )
     authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAuthenticated,)
 

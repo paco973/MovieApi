@@ -14,7 +14,7 @@ class Movie(models.Model):
 class Comment(models.Model):
     movie = models.ForeignKey(Movie,on_delete = models.CASCADE )
     user = models.ForeignKey(User, on_delete= models.CASCADE )
-    text = models.models.TextField()
+    text = models.TextField()
 
     class Meta:
         unique_together = (('user', 'movie'),)
