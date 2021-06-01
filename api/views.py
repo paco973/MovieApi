@@ -19,24 +19,24 @@ class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
     serializer_class = (MovieSerializer)
     authentication_classes = (TokenAuthentication, )
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
 
 
     @action(detail=True, methods=['POST'])
-
-    def rate_movie(self, request, pk=None):
+    def comment_movie(self, request, pk=None):
+       
         if 'text' in request.data:
 
             movie = Movie.objects.get(id=pk)
             text = request.data['text']
             user =request.user
-            
+            print('\n\n\n',user, text)
             try:
                 comment =Comment.objects.get(user = user.id, movie = movie.id)
                 comment.text = text
                 comment.save()
                 serializer = CommentSerializer(comment, many=False)
-                response = {'message': 'Rating update', 'resut': serializer.data}
+                response = {'message': 'Comment update', 'resut': serializer.data}
                 return Response(response, status=status.HTTP_200_OK)
             except:
                 comment = Comment.objects.create(user = user, movie = movie, text = text)
@@ -45,7 +45,7 @@ class MovieViewSet(viewsets.ModelViewSet):
                 return Response(response, status=status.HTTP_200_OK)
             
         else:
-            response = {'message': 'you need to provide stars'}
+            response = {'message': 'you need to provide text'}
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
