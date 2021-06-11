@@ -1,0 +1,10 @@
+# config
+SECRET_KEY = 'ticapi'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///api.db'
+UPLOAD_FOLDER = 'uploads/'
+MAX_CONTENT_LENGTH = 100 * 1024 * 1024
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# dev
+DEBUG = True
+SQLALCHEMY_ECHO = True
